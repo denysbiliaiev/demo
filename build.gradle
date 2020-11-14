@@ -14,6 +14,7 @@ repositories {
 }
 
 dependencies {
+	compile group: 'org.postgresql', name: 'postgresql', version: '42.2.14'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
