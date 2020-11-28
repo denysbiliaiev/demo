@@ -1,6 +1,7 @@
 package com.example.demo;
 
-import com.example.demo.database.entity.User;
+import com.example.demo.database.entity.Gender;
+import com.example.demo.database.entity.UserEntity;
 import com.example.demo.database.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,25 +17,17 @@ public class DemoApplication {
 
 	@Bean
 	public CommandLineRunner demo (UserRepository repository) {
-		User user = new User();
+		UserEntity userEntity = new UserEntity();
 
-		user.setId(5L);
-		user.setFirstName("userFirstName");
-		user.setLastName("userLastName");
-		user.setAge(15);
-		user.setEmail("userEmail@jdbc.com");
+		userEntity.setFirstName("userFirstName");
+		userEntity.setLastName("userLastName");
+		userEntity.setGender(Gender.MALE);
+		userEntity.setAge(15);
 
 		//SAVE
-		repository.save(user);
+		repository.save(userEntity);
 
-		//UPDATE
-		user.setEmail("updatedUserEmail@jdbc.com");
-		repository.update(user);
-
-		//DELETE
-		repository.delete(5L);
-
-		//FIND BY EMAIL
-		return (args) -> repository.findByEmail("updatedUserEmail@jdbc.com").ifPresent(System.out::println);
+		//FIND BY ID
+		return (args) -> repository.findById(5L).ifPresent(System.out::println);
 	}
 }
