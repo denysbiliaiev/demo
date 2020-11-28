@@ -7,6 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -21,11 +23,15 @@ public class DemoApplication {
 
 		userEntity.setFirstName("userFirstName");
 		userEntity.setLastName("userLastName");
+		userEntity.setEmail("userLastName@springData.com");
 		userEntity.setGender(Gender.MALE);
 		userEntity.setAge(15);
 
 		//SAVE
 		repository.save(userEntity);
+
+		//PAGINATION
+		//repository.findAll(PageRequest.of(1, 10, Sort.Direction.DESC, "age"));
 
 		//FIND BY ID
 		return (args) -> repository.findById(5L).ifPresent(System.out::println);
